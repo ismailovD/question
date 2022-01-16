@@ -318,9 +318,7 @@ body {
     line-height: 21px;
     color: var(--purple); 
 }
-.number__input::placeholder {
-    
-}
+ 
 .number__input:focus {
     outline: none;
     border:2px solid var(--purple); 
