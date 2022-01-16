@@ -564,6 +564,10 @@ body {
     .side:first-child {
         display: none
     }
+
+    .right__content {
+        padding-top: 50px !important;
+    }
 }
 
 @media (max-height: 800px) {
