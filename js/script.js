@@ -296,12 +296,21 @@ const formSelect = new Add({
 })
 
 const mySwipe = new Swiper('.bookingSwiper', {
-    slidesPerView: 3,
-    spaceBetween: 30,
+    slidesPerView: 1,
+    spaceBetween: 30, 
     navigation: {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
-      },
+    },
+    breakpoints: {
+        450: {
+            slidesPerView: 2,
+        },
+        768: {
+            slidesPerView: 3,
+            
+        }
+    }
 })
 
 
