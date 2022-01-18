@@ -43,11 +43,17 @@ class Continue {
 
     }
     hideDashboard() {
+        let src1 = this.dashboards[0].getAttribute('src'),
+            src2 = this.dashboards[1].getAttribute('src');
+       
         for (let i = 0; i < this.dashboards.length; i++) {
             setTimeout(() => {
-                this.dashboards[i].classList.add('hide')
+                this.dashboards[i].classList.add('hide');
+                
             }, ((200 / (i + 1))))
-            setTimeout(() => {
+            setTimeout(() => { 
+                this.dashboards[0].setAttribute('src', src2) 
+                this.dashboards[1].setAttribute('src', src1) 
                 this.dashboards[i].classList.remove('hide')
             }, ((i * 100) + 400))
         }
@@ -90,24 +96,36 @@ const btnContinue = new Continue({
 
 class FillNum {
     constructor(option) {
-        this.numInp = document.querySelectorAll(option.el);
-        this.min = 0;
+        this.numInp = document.querySelectorAll(option.el); 
         this.numInp.forEach(elem => {
             let input = elem.querySelector('input'),
                 btnTop = elem.querySelector('.number__top'),
                 btnBottom = elem.querySelector('.number__bottom');
-            input.addEventListener('input', () => {
+            input.addEventListener('change', () => {
                 let Temp = input.value.replace(/[^\d]/g, '').substring(0, 16);
-                input.value = Temp;
+                if(Temp > 1){
+                    input.value = Temp + ' days';
+                }else {
+                    input.value = Temp + ' day';
+                }
             })
             btnTop.addEventListener('click', () => {
-                input.value = Number(input.value) + 1
+                let Temp = Number(input.value.split(" ")[0]);  
+                console.log(Temp);
+                if(Temp > 0) {
+                    input.value = Temp + 1 + ' days';
+                }else {
+                    input.value = Temp + 1 + ' day';
+                }
             })
             btnBottom.addEventListener('click', () => {
-                if (input.value > this.min) {
-                    input.value -= 1
+                let Temp = Number(input.value.split(" ")[0]);  
+                console.log(Temp);
+                if(Temp > 2) {
+                    input.value = Temp - 1 + ' days';
+                }else if(Temp <= 2 && Temp > 0) {
+                    input.value = Temp - 1 + ' day';
                 }
-
             })
         })
 
@@ -204,6 +222,14 @@ class Add {
                 } else this.hideList()
             } else this.hideList()
 
+        })
+        window.addEventListener('keydown', (e) => {
+            if (this.input.value.length > 0) {
+                if(e.keyCode == "13"){
+                this.targetShow();
+                } 
+            }
+            
         })
         this.btn.addEventListener('click', (e) => {
             e.preventDefault();

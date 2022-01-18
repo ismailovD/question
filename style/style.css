@@ -162,21 +162,21 @@ body {
     -webkit-transition: 0.5s;
     -o-transition: 0.5s;
     transition: 0.5s;
-    top: 470px
+    top: 520px; 
 }
 
 .dashboard-1 {
-    left: 55%;
-    -webkit-transform: translateX(-85%);
-    -ms-transform: translateX(-85%);
-    transform: translateX(-85%)
+    left: 35%;
+    -webkit-transform: translateX(-85%) rotate(-15.8deg);
+    -ms-transform: translateX(-85%) rotate(-15.8deg);
+    transform: translateX(-85%)  rotate(-15.8deg)
 }
 
 .dashboard-2 {
-    left: 70%;
-    -webkit-transform: translateX(-50%);
-    -ms-transform: translateX(-50%);
-    transform: translateX(-50%)
+    left: 60%;
+    -webkit-transform: translateX(-50%) rotate(-15.8deg);
+    -ms-transform: translateX(-50%) rotate(-15.8deg);
+    transform: translateX(-50%) rotate(-15.8deg)
 }
 
 .dashboard.hide {
@@ -855,11 +855,17 @@ body {
 }
 
 #right-6 .inner {
-    max-width: 530px
+    max-width: 530px;
+    padding: 0 25px;
 }
 
 #right-6 .question {
-    margin-bottom: 25px
+    margin-bottom: 20px
+}
+#right-6 .inner__title {
+    font-size: 22px;
+    line-height: 30px;
+    margin-bottom: 10px;
 }
 
 .finaly {
