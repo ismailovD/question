@@ -23,9 +23,9 @@
                             <svg class="icon__bg-R icon__bg">
                                 <use xlink:href="./svg/sprite.svg#big-logo"></use>
                             </svg>
-                            <img src="./images/dashboard1.png" alt="dashboard"
-                                class="dashboard dashboard-1">
                             <img src="./images/dashboard2.png" alt="dashboard"
+                                class="dashboard dashboard-1">
+                            <img src="./images/dashboard1.png" alt="dashboard"
                                 class="dashboard dashboard-2">
 
                             <div class="left__content">
@@ -95,7 +95,8 @@
                                                 <div class="number">
                                                     <input type="text"
                                                         class="number__input"
-                                                        value="0 day">
+                                                        value="0" maxlength="3">
+                                                        <span class="window__day"></span>
                                                     <span class="number__top
                                                         number__btn">
                                                         <svg
@@ -159,7 +160,8 @@
                                                 <div class="number">
                                                     <input type="text"
                                                         class="number__input"
-                                                        value="0 day">
+                                                        value="0" maxlength="3" >
+                                                    <span class="window__day"></span>
                                                     <span class="number__top
                                                         number__btn">
                                                         <svg
@@ -460,9 +462,32 @@
                     <h3 class="booking__title">
                         Time slots available as below
                     </h3>
-                    <span class="booking__day">
-                        Tuesday, January 18
+                    <span class="booking__date">
+                        January, 2022
                     </span>
+                    <div class="swiper bookingSwiper daySwiper">
+                        <div class="swiper-wrapper booking__wrapper booking__wrapper-day">
+                            
+                        </div>
+                        <div class="swiper-button-next booking__button-next">
+                            <svg class="swiper__btn-R">
+                                <use xlink:href="./svg/sprite.svg#chevron-left"></use>
+                            </svg>
+                        </div>
+                        <div class="swiper-button-prev booking__button-prev">
+                            <svg class="swiper__btn-L">
+                                <use xlink:href="./svg/sprite.svg#chevron-left"></use>
+                            </svg>
+                        </div>
+                    </div>
+                    <p class="curent-time">
+                        <svg class="curent-time__icon">
+                            <use xlink:href="./svg/sprite.svg#globe"></use>
+                        </svg>
+                        <span class="curent-time__country">India </span>
+                        standard time 
+                        <span class="curent-time__data"> (2:39am) </span>
+                    </p>
                     <div class="swiper bookingSwiper">
                         <div class="swiper-wrapper booking__wrapper">
                             <div class="swiper-slide booking__slide"> 
@@ -538,7 +563,7 @@
                              </span>
                              <input type="email" class="booking__email-input" placeholder="example@gmail.com">
                          </div>
-                         <button type="submit" class="booking__send-btn">Book</button>
+                         <button type="submit" class="booking__send-btn" data-text="thank you">Book</button>
                     </div>
                 </form>
             </div>
@@ -546,7 +571,7 @@
 
 
 
-        <template>
+        <template id="template">
             <span id="re" data-id="right-1">Welcome to EcoReturns!</span>
             <span data-id="right-2">Give your customers hasslefree returns</span>
             <span data-id="right-3">Convert Returns to Exchanges and improve
@@ -557,6 +582,12 @@
                 missing, we will do it for you, Free.</span>
             <span data-id="right-6">AI to rescue you from fraud, reduce your
                 returns and be Ecofriendly</span>
+            <img src="./images/dashboard1.png" alt="" class="src__img">
+            <img src="./images/dashboard2.png" alt="" class="src__img">
+            <img src="./images/dashboard3.png" alt="" class="src__img">
+            <img src="./images/dashboard4.png" alt="" class="src__img">
+            <img src="./images/dashboard5.png" alt="" class="src__img">
+            <img src="./images/dashboard6.png" alt="" class="src__img">
         </template>
 
         <script src="./libs/swiper/swiper-bundle.min.js"></script>

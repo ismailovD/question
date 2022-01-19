@@ -22,9 +22,10 @@ class Continue {
         this.curentPage = document.querySelector('.curent__page');
         this.maxPage = document.querySelector('.max__page');
         this.max = document.querySelectorAll('.' + this.parent).length - 1;
-        this.sample = document.querySelector('template').content.cloneNode(true);
+        this.sample = document.querySelector('#template').content.cloneNode(true);
         this.mainContent = document.querySelector('.content');
-        this.finalyContent = document.querySelector('.finaly');
+        this.finalyContent = document.querySelector('.finaly'); 
+        
 
         this.btns.forEach(btn => {
             if(btn.hasAttribute('id')){
@@ -32,33 +33,44 @@ class Continue {
                     e.preventDefault();
                     this.changeMainContent()
                 })
-            }else {
-                 btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                this.changeContent(btn)
+            }else { 
+                btn.addEventListener('click', (e) => { 
+                e.preventDefault(); 
+                    for(let i = 0; i < this.btns.length; i++){ 
+                        if(this.btns[i] == btn){
+                            this.changeContent(btn , i);
+                        } 
+                    }
                 })
             }
            
         })
 
-    }
-    hideDashboard() {
-        let src1 = this.dashboards[0].getAttribute('src'),
-            src2 = this.dashboards[1].getAttribute('src');
-       
-        for (let i = 0; i < this.dashboards.length; i++) {
-            setTimeout(() => {
+    }  
+    hideDashboard(a) {  
+        let images = this.sample.querySelectorAll('.src__img'),
+            arrSrc = [];
+            images.forEach(img => {
+                arrSrc.push(img.getAttribute('src'));
+            })
+        for(let i = 0; i < this.dashboards.length; i++){
+            setTimeout(() => {   
                 this.dashboards[i].classList.add('hide');
-                
-            }, ((200 / (i + 1))))
+                this.dashboards[0].setAttribute('src', arrSrc[0]);
+                this.dashboards[1].setAttribute('src', arrSrc[a + 1]);
+            }, 300/( i + 100)) 
             setTimeout(() => { 
-                this.dashboards[0].setAttribute('src', src2) 
-                this.dashboards[1].setAttribute('src', src1) 
                 this.dashboards[i].classList.remove('hide')
-            }, ((i * 100) + 400))
+            }, i*100 + 200) 
         }
+            
     }
-    changeContent(item) {
+    visibleDashboard(d){
+        setTimeout(() => {     
+            d.classList.remove('hide')
+        }, 300) 
+    }
+    changeContent(item, ind) {
         let parent = item.closest('.' + this.parent),
             nextElemeent = parent.nextElementSibling;
         if (nextElemeent) {
@@ -73,8 +85,8 @@ class Continue {
             setTimeout(() => { this.title.innerHTML = text.innerHTML; }, 200)
             setTimeout(() => { this.title.classList.remove('hide'); this.panel.classList.remove('dont-show'); }, 300)
             this.curentPage.innerHTML = ++index;
-            this.maxPage.innerHTML = this.max;
-            this.hideDashboard()
+            this.maxPage.innerHTML = this.max; 
+            this.hideDashboard(ind);  
         };
     }
     changeMainContent(){
@@ -84,7 +96,8 @@ class Continue {
             this.mainContent.classList.add('hidden');
             this.finalyContent.classList.remove('slide-down');
         },100)
-        changeTime ()
+        setTimeIndia()
+        changeTime()
     }
 }
 
@@ -100,31 +113,33 @@ class FillNum {
         this.numInp.forEach(elem => {
             let input = elem.querySelector('input'),
                 btnTop = elem.querySelector('.number__top'),
-                btnBottom = elem.querySelector('.number__bottom');
+                btnBottom = elem.querySelector('.number__bottom'),
+                day = elem.querySelector('.window__day');
             input.addEventListener('change', () => {
                 let Temp = input.value.replace(/[^\d]/g, '').substring(0, 16);
-                if(Temp > 1){
-                    input.value = Temp + ' days';
+                input.value = Temp;
+                if(Temp > 1){ 
+                    day.innerText = "days"
                 }else {
-                    input.value = Temp + ' day';
+                    day.innerText = "day"
                 }
             })
             btnTop.addEventListener('click', () => {
                 let Temp = Number(input.value.split(" ")[0]);  
-                console.log(Temp);
+                input.value = Temp + 1;
                 if(Temp > 0) {
-                    input.value = Temp + 1 + ' days';
+                    day.innerText = 'days';
                 }else {
-                    input.value = Temp + 1 + ' day';
+                    day.innerText = 'day';
                 }
             })
             btnBottom.addEventListener('click', () => {
                 let Temp = Number(input.value.split(" ")[0]);  
-                console.log(Temp);
+                input.value = Temp - 1;
                 if(Temp > 2) {
-                    input.value = Temp - 1 + ' days';
+                    day.innerText = 'days';
                 }else if(Temp <= 2 && Temp > 0) {
-                    input.value = Temp - 1 + ' day';
+                    day.innerText = 'day';
                 }
             })
         })
@@ -339,4 +354,73 @@ const mySwipe = new Swiper('.bookingSwiper', {
     }
 })
 
+class MyDate {
+    constructor(option){
+        this.parent = document.querySelector(option.el);  
+        this.date = this.parent.querySelector('.booking__date'); 
+        this.wrapperSlider = this.parent.querySelector('.booking__wrapper-day');
+        this.months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        this.setDate()
+    }
+    setDate(){
+        const newDate = new Date(),
+            year = newDate.getFullYear(), 
+            month = newDate.getMonth(),
+            day = newDate.getDate(), 
+            lastDayDate = new Date(year, month + 1, 0),
+            lastDay = lastDayDate.toLocaleString('RU', {day: 'numeric'});
+        this.date.textContent = `${this.months[month]}, ${year}`;   
+        
+        this.setSlide(day, lastDay);
+    }
+    setSlide(a, b){
+        for(let i = 0; i < (b-a) + 1; i++){
+            let sample = document.createElement('div');
+                sample.classList.add('swiper-slide' , 'booking__slide');
+                sample.innerHTML = `
+            <label>
+                <input type="radio" class="swiper__radio" name="swiper__day">
+                    <span class="booking__box">
+                        <span class="booking__day"> ${a + i}</span> 
+                    </span>
+            </label>
+            `;
+            this.wrapperSlider.appendChild(sample);
+        }
+       
+    }
+}
 
+const myDate = new MyDate({
+    el: '.booking' 
+})
+
+const btnBook = document.querySelector('.booking__send-btn');
+
+btnBook.addEventListener('click', (e) => {
+    e.preventDefault();
+    let text = btnBook.getAttribute('data-text'),
+        content = btnBook.textContent; 
+    btnBook.textContent = text;
+    btnBook.classList.add('confirm');
+    btnBook.setAttribute('data-text', content); 
+    setTimeout(() => {
+        btnBook.classList.remove('confirm');
+        btnBook.textContent = content;
+        btnBook.setAttribute('data-text', text); 
+    }, 2000)
+})
+
+const curentTimeIndia = document.querySelector('.curent-time__data');
+
+function setTimeIndia() { 
+    let d = new Date(),
+        utc = d.getTime() + (d.getTimezoneOffset() * 60000),
+        nd = new Date(utc + (3600000*(+5.5))),
+        time = nd.toLocaleTimeString().split(':'),
+        hour = time[0] > 12 ? time[0] - 12 : time[0],
+        minute = time[1],
+        day = time[0] > 12 ? 'pm' : 'am'; 
+        curentTimeIndia.textContent = `(${hour}:${minute} ${day})`
+    setTimeout(setTimeIndia, 1000)
+}

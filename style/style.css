@@ -162,21 +162,21 @@ body {
     -webkit-transition: 0.5s;
     -o-transition: 0.5s;
     transition: 0.5s;
-    top: 520px; 
+    top: 470px; 
 }
 
 .dashboard-1 {
-    left: 35%;
-    -webkit-transform: translateX(-85%) rotate(-15.8deg);
-    -ms-transform: translateX(-85%) rotate(-15.8deg);
-    transform: translateX(-85%)  rotate(-15.8deg)
+    left: 40%;
+    -webkit-transform: translateX(-85%);
+    -ms-transform: translateX(-85%);
+    transform: translateX(-85%)
 }
 
 .dashboard-2 {
-    left: 60%;
-    -webkit-transform: translateX(-50%) rotate(-15.8deg);
-    -ms-transform: translateX(-50%) rotate(-15.8deg);
-    transform: translateX(-50%) rotate(-15.8deg)
+    left:70%;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%)
 }
 
 .dashboard.hide {
@@ -393,7 +393,17 @@ body {
     position: relative;
     width: 131px
 }
-
+.window__day {
+    position: absolute;
+    font-family: var(--f400-lato);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    color: var(--blue);
+    top: 50%;
+    transform: translateY(-50%);
+    right: 60px;
+}
 .number__input {
     width: 100%;
     padding: 14px;
@@ -849,8 +859,7 @@ body {
     visibility: visible
 }
 
-#right-6 {
-    padding-top: 50px;
+#right-6 { 
     overflow: auto
 }
 
@@ -975,14 +984,14 @@ body {
     margin-bottom: 35px
 }
 
-.booking__day {
+.booking__date {
     display: inline-block;
     width: 100%;
     font-family: var(--f500-lato);
     font-weight: 500;
     font-size: 16px;
     line-height: 19.2px;
-    color: var(--blue);
+    color: var(--purple);
     margin-bottom: 17px;
     text-align: center
 }
@@ -994,7 +1003,9 @@ body {
     padding: 5px 29px;
     margin-bottom: 44px
 }
-
+.daySwiper {
+    margin-bottom: 25px;
+}
 .swiper__radio {
     display: none
 }
@@ -1154,10 +1165,38 @@ body {
     font-size: 14px;
     line-height: 21px;
     color: var(--white);
-    background: var(--blue);
+    background: transparent;
     border: 2px solid var(--blue);
     border-radius: 3px;
-    cursor: pointer
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 0 40px 40px var(--blue) inset, 0 0 0 0 var(--blue);
+    -webkit-transition: all 150ms ease-in-out;
+    transition: all 150ms ease-in-out;
+}
+   
+.booking__send-btn.confirm {
+     text-transform: uppercase;
+     background: var(--light-blue);
+     border: 2px solid var(--light-blue);
+     box-shadow: none;
+}
+ 
+.curent-time {
+    font-family: var(--f400-lato);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16.8px;
+    color: var(--purple);
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.curent-time__icon {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: var(--purple);
 }
 
 @-webkit-keyframes motion {
