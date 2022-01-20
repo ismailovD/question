@@ -25,6 +25,11 @@ class Continue {
         this.sample = document.querySelector('#template').content.cloneNode(true);
         this.mainContent = document.querySelector('.content');
         this.finalyContent = document.querySelector('.finaly'); 
+        this.arrImg = this.sample.querySelectorAll('.src__img');
+        this.arrSrc = [];
+        this.arrImg.forEach(img => {
+            this.arrSrc.push(img.getAttribute('src'));
+        })
         
 
         this.btns.forEach(btn => {
@@ -48,22 +53,19 @@ class Continue {
 
     }  
     hideDashboard(a) {  
-        let images = this.sample.querySelectorAll('.src__img'),
-            arrSrc = [];
-            images.forEach(img => {
-                arrSrc.push(img.getAttribute('src'));
-            })
-        for(let i = 0; i < this.dashboards.length; i++){
-            setTimeout(() => {   
-                this.dashboards[i].classList.add('hide');
-                this.dashboards[0].setAttribute('src', arrSrc[0]);
-                this.dashboards[1].setAttribute('src', arrSrc[a + 1]);
-            }, 300/( i + 100)) 
-            setTimeout(() => { 
-                this.dashboards[i].classList.remove('hide')
-            }, i*100 + 200) 
-        }
-            
+         
+            this.dashboards[0].classList.add('hide')  
+            this.dashboards[1].classList.add('hide') 
+        setTimeout(() => { 
+            this.dashboards[0].setAttribute('src', this.arrSrc[0]);
+            this.dashboards[1].setAttribute('src', this.arrSrc[a + 1]);
+        }, 300) 
+        setTimeout(() => { 
+            this.dashboards[0].classList.remove('hide') 
+        }, 500) 
+        setTimeout(() => {  
+            this.dashboards[1].classList.remove('hide')
+        }, 600) 
     }
     visibleDashboard(d){
         setTimeout(() => {     
@@ -114,32 +116,35 @@ class FillNum {
             let input = elem.querySelector('input'),
                 btnTop = elem.querySelector('.number__top'),
                 btnBottom = elem.querySelector('.number__bottom'),
-                day = elem.querySelector('.window__day');
-            input.addEventListener('change', () => {
+                day = elem.querySelector('.window__day'),
+                text = day.getAttribute('value');
+                 
+                input.addEventListener('change', () => {
                 let Temp = input.value.replace(/[^\d]/g, '').substring(0, 16);
                 input.value = Temp;
                 if(Temp > 1){ 
-                    day.innerText = "days"
+                    day.innerText =  text + "s"
                 }else {
-                    day.innerText = "day"
+                    day.innerText = text
                 }
             })
             btnTop.addEventListener('click', () => {
                 let Temp = Number(input.value.split(" ")[0]);  
                 input.value = Temp + 1;
                 if(Temp > 0) {
-                    day.innerText = 'days';
+                    day.innerText = text + 's';
                 }else {
-                    day.innerText = 'day';
+                    day.innerText = text
                 }
             })
             btnBottom.addEventListener('click', () => {
-                let Temp = Number(input.value.split(" ")[0]);  
-                input.value = Temp - 1;
+                let Temp = Number(input.value.split(" ")[0]);   
                 if(Temp > 2) {
-                    day.innerText = 'days';
+                    day.innerText = text + 's';
+                    input.value = Temp - 1;
                 }else if(Temp <= 2 && Temp > 0) {
-                    day.innerText = 'day';
+                    day.innerText = text;
+                    input.value = Temp - 1;
                 }
             })
         })

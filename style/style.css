@@ -159,10 +159,10 @@ body {
 .dashboard {
     position: absolute;
     width: 100%;
-    -webkit-transition: 0.5s;
-    -o-transition: 0.5s;
-    transition: 0.5s;
-    top: 470px; 
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+    top: 470px
 }
 
 .dashboard-1 {
@@ -173,14 +173,14 @@ body {
 }
 
 .dashboard-2 {
-    left:70%;
+    left: 70%;
     -webkit-transform: translateX(-50%);
     -ms-transform: translateX(-50%);
     transform: translateX(-50%)
 }
 
 .dashboard.hide {
-    top: 100%
+    top: 110%
 }
 
 .logo {
@@ -391,8 +391,9 @@ body {
 
 .number {
     position: relative;
-    width: 131px
+    width: 131px; 
 }
+
 .window__day {
     position: absolute;
     font-family: var(--f400-lato);
@@ -401,9 +402,12 @@ body {
     line-height: 21px;
     color: var(--blue);
     top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
     transform: translateY(-50%);
-    right: 60px;
+    left: 45px; 
 }
+
 .number__input {
     width: 100%;
     padding: 14px;
@@ -420,7 +424,7 @@ body {
     outline: none;
     border: 2px solid var(--purple)
 }
-
+ 
 .number__btn {
     position: absolute;
     width: 46px;
@@ -433,9 +437,10 @@ body {
     justify-content: center;
     right: 0;
     z-index: 5;
-    cursor: pointer
+    cursor: pointer 
 }
-
+ 
+ 
 .number__icon {
     width: 18px;
     height: 9px;
@@ -859,22 +864,23 @@ body {
     visibility: visible
 }
 
-#right-6 { 
+#right-6 {
     overflow: auto
 }
 
 #right-6 .inner {
     max-width: 530px;
-    padding: 0 25px;
+    padding: 0 25px
 }
 
 #right-6 .question {
     margin-bottom: 20px
 }
+
 #right-6 .inner__title {
     font-size: 22px;
     line-height: 30px;
-    margin-bottom: 10px;
+    margin-bottom: 10px
 }
 
 .finaly {
@@ -1003,9 +1009,11 @@ body {
     padding: 5px 29px;
     margin-bottom: 44px
 }
+
 .daySwiper {
-    margin-bottom: 25px;
+    margin-bottom: 25px
 }
+
 .swiper__radio {
     display: none
 }
@@ -1170,18 +1178,21 @@ body {
     border-radius: 3px;
     cursor: pointer;
     position: relative;
+    -webkit-box-shadow: 0 0 40px 40px var(--blue) inset, 0 0 0 0 var(--blue);
     box-shadow: 0 0 40px 40px var(--blue) inset, 0 0 0 0 var(--blue);
     -webkit-transition: all 150ms ease-in-out;
-    transition: all 150ms ease-in-out;
+    -o-transition: all 150ms ease-in-out;
+    transition: all 150ms ease-in-out
 }
-   
+
 .booking__send-btn.confirm {
-     text-transform: uppercase;
-     background: var(--light-blue);
-     border: 2px solid var(--light-blue);
-     box-shadow: none;
+    text-transform: uppercase;
+    background: var(--light-blue);
+    border: 2px solid var(--light-blue);
+    -webkit-box-shadow: none;
+    box-shadow: none
 }
- 
+
 .curent-time {
     font-family: var(--f400-lato);
     font-weight: 400;
@@ -1189,14 +1200,14 @@ body {
     line-height: 16.8px;
     color: var(--purple);
     text-align: center;
-    margin-bottom: 15px;
+    margin-bottom: 15px
 }
 
 .curent-time__icon {
     width: 18px;
     height: 18px;
     fill: none;
-    stroke: var(--purple);
+    stroke: var(--purple)
 }
 
 @-webkit-keyframes motion {
@@ -1289,4 +1300,3 @@ body {
         margin-bottom: 20px
     }
 }
- 
