@@ -117,7 +117,7 @@ class FillNum {
                 btnTop = elem.querySelector('.number__top'),
                 btnBottom = elem.querySelector('.number__bottom'),
                 day = elem.querySelector('.window__day'),
-                text = day.getAttribute('value');
+                text = day.textContent;
                  
                 input.addEventListener('change', () => {
                 let Temp = input.value.replace(/[^\d]/g, '').substring(0, 16);
