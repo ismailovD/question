@@ -119,7 +119,7 @@ class FillNum {
                 day = elem.querySelector('.window__day'),
                 text = day.textContent;
                  
-                input.addEventListener('change', () => {
+                input.addEventListener('input', () => {
                 let Temp = input.value.replace(/[^\d]/g, '').substring(0, 16);
                 input.value = Temp;
                 if(Temp > 1){ 
@@ -231,32 +231,30 @@ class Add {
         this.warning = this.add.querySelector('.add__warning');
         this.targetDelete = undefined;
 
-        this.input.addEventListener('input', () => {
+        this.input.addEventListener('input', (e) => { 
             if (this.items.length > 0) {
                 this.removeItems();
             }
             if (this.input.value.length > 0) {
+                this.addChoose();
                 let filterArr = this.filterItems(brands, this.input.value);
                 if (filterArr.length > 0) {
                     this.showList(filterArr)
                 } else this.hideList()
             } else this.hideList()
 
-        })
-        window.addEventListener('keydown', (e) => {
-            if (this.input.value.length > 0) {
-                if(e.keyCode == "13"){
-                this.targetShow();
-                } 
+        });
+        this.input.addEventListener('keydown', (e) => {
+            if(e.keyCode == 40 || e.keyCode == 38) {
+                e.preventDefault()
             }
-            
-        })
+        });
         this.btn.addEventListener('click', (e) => {
             e.preventDefault();
             if (this.input.value.length > 0) {
                 this.targetShow();
             }
-        })
+        });
     }
     filterItems(arr, query) {
         return arr.filter(el => el.toLowerCase().indexOf(query.toLowerCase()) !== -1 && el[0].toLowerCase() == query[0].toLowerCase());
@@ -284,11 +282,13 @@ class Add {
     }
     selectItem() {
         this.items = this.add.querySelectorAll('.add__item');
+        this.listControl()
         this.items.forEach(el => {
             el.addEventListener('click', (e) => {
                 e.preventDefault();
                 this.input.value = el.textContent;
-                this.hideList()
+                this.hideList(); 
+                this.addChoose();
             })
         })
 
@@ -333,7 +333,51 @@ class Add {
         }
         
     }
-     
+    listControl() {
+        let j = -1;
+        
+        window.addEventListener('keydown', (e) => { 
+            if( e.keyCode === 40 && j < this.items.length ) { 
+                if(j < this.items.length - 1){
+                    j++
+                }
+                this.items.forEach(item => item.classList.remove('choose'));
+                this.items[j].classList.add('choose');  
+                this.selected(this.items[j]); 
+                console.log(j);
+
+            }else if (e.keyCode === 38 && j >= 0){ 
+                if(j > 0){
+                    j--
+                }
+                this.items.forEach(item => item.classList.remove('choose'));
+                this.items[j].classList.add('choose'); 
+                this.selected(this.items[j])
+                console.log(j);
+            }
+        })
+    }
+    selected(elem){    
+        window.addEventListener('keydown', (e) => { 
+            if( e.keyCode === 13) {
+                this.input.value = elem.textContent;
+                this.list.classList.remove('visible'); 
+                this.addChoose()
+            }
+                    
+        }, {once: true});
+        
+    }
+    addChoose(){ 
+        window.addEventListener('keydown', (e) => { 
+            if( e.keyCode === 13) {
+                if (this.input.value.length > 0) { 
+                    this.targetShow(); 
+                    this.list.classList.remove('visible')
+                } 
+            }     
+        }, {once: true}) 
+    }
 }
 
 
