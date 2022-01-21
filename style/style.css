@@ -1252,9 +1252,9 @@ body {
 }
 
 @media (max-width: 1100px) {
-    /* .side:first-child {
+    .side:first-child {
         display: none
-    } */
+    }
 
     .right__content {
         padding-top: 50px !important
