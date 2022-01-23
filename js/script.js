@@ -473,3 +473,19 @@ function setTimeIndia() {
         curentTimeIndia.textContent = `(${hour}:${minute} ${day})`
     setTimeout(setTimeIndia, 1000)
 }
+
+
+const   browserTab = document.querySelector('#browser__tab'),
+        browserText = browserTab.textContent;
+
+
+document.addEventListener("visibilitychange", function(){
+	if (document.hidden){
+		browserTab.innerHTML = '👋 Come back 😭'
+	} else {
+        browserTab.innerHTML = "Thanks 🤗";
+       setTimeout(()=> {
+        browserTab.innerHTML = browserText;
+       }, 1000)
+	}
+});

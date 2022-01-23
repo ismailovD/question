@@ -1235,6 +1235,10 @@ body {
     stroke: var(--purple)
 }
 
+#browser__tab {
+    color: red;
+}
+
 @-webkit-keyframes motion {
     from {
         -webkit-transform: rotateY(0);
