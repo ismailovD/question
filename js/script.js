@@ -122,6 +122,7 @@ class FillNum {
                 input.addEventListener('input', () => {
                 let Temp = input.value.replace(/[^\d]/g, '').substring(0, 16);
                 input.value = Temp;
+                elem.setAttribute('data-value', Temp);
                 if(Temp > 1){ 
                     day.innerText =  text + "s"
                 }else {
@@ -131,6 +132,7 @@ class FillNum {
             btnTop.addEventListener('click', () => {
                 let Temp = Number(input.value.split(" ")[0]);  
                 input.value = Temp + 1;
+                elem.setAttribute('data-value', Temp + 1)
                 if(Temp > 0) {
                     day.innerText = text + 's';
                 }else {
@@ -142,9 +144,11 @@ class FillNum {
                 if(Temp > 2) {
                     day.innerText = text + 's';
                     input.value = Temp - 1;
+                    elem.setAttribute('data-value', Temp - 1)
                 }else if(Temp <= 2 && Temp > 0) {
                     day.innerText = text;
                     input.value = Temp - 1;
+                    elem.setAttribute('data-value', Temp - 1)
                 }
             })
         })
@@ -230,12 +234,15 @@ class Add {
         this.addElements = [];
         this.warning = this.add.querySelector('.add__warning');
         this.targetDelete = undefined;
+        this.itemHeight;
+        this.itemMax = 5; 
 
         this.input.addEventListener('input', (e) => { 
             if (this.items.length > 0) {
                 this.removeItems();
             }
-            if (this.input.value.length > 0) {
+            if (this.input.value.length > 0 && this.input.value.trim() !== '') {
+                this.list.scroll(0, 0);
                 this.addChoose();
                 let filterArr = this.filterItems(brands, this.input.value);
                 if (filterArr.length > 0) {
@@ -274,9 +281,12 @@ class Add {
             sample.innerText = item;
             this.list.appendChild(sample)
         })
+        this.itemHeight = parseInt(window.getComputedStyle(this.list.children[0],null).getPropertyValue("height"));  
+        this.list.style.maxHeight =   this.itemHeight * this.itemMax + 'px'; 
         this.selectItem()
     }
     hideList() {
+        this.list.scroll(0, 0);
         this.list.classList.remove('visible');
         this.removeItems()
     }
@@ -334,26 +344,33 @@ class Add {
         
     }
     listControl() {
-        let j = -1;
-        
+        let j = -1,
+        scrl = this.itemMax,
+        scrl2 ;
         window.addEventListener('keydown', (e) => { 
             if( e.keyCode === 40 && j < this.items.length ) { 
                 if(j < this.items.length - 1){
                     j++
                 }
+                if(j - this.itemMax >= 0 && j >= scrl  ) {    
+                    this.list.scroll(0, (j - this.itemMax) *  this.itemHeight + this.itemHeight);   
+                    scrl2 = j - this.itemMax; 
+                } 
                 this.items.forEach(item => item.classList.remove('choose'));
                 this.items[j].classList.add('choose');  
-                this.selected(this.items[j]); 
-                console.log(j);
+                this.selected(this.items[j]);  
 
             }else if (e.keyCode === 38 && j >= 0){ 
                 if(j > 0){
                     j--
                 }
+                if(j < this.items.length - this.itemMax && j <= scrl2) { 
+                    this.list.scroll(0, this.itemHeight * j) ; 
+                    scrl = j + this.itemMax;
+                }
                 this.items.forEach(item => item.classList.remove('choose'));
                 this.items[j].classList.add('choose'); 
-                this.selected(this.items[j])
-                console.log(j);
+                this.selected(this.items[j]) 
             }
         })
     }
@@ -361,8 +378,8 @@ class Add {
         window.addEventListener('keydown', (e) => { 
             if( e.keyCode === 13) {
                 this.input.value = elem.textContent;
-                this.list.classList.remove('visible'); 
-                this.addChoose()
+                this.hideList();
+                this.addChoose();
             }
                     
         }, {once: true});

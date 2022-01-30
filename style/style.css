@@ -114,7 +114,7 @@ body {
     height: 100%;
     -webkit-perspective: 1000px;
     perspective: 1000px;
-    padding: 135px 25px 0;
+    padding:10% 25px 15%;
     max-width: 850px;
     width: 100%;
     margin-left: auto;
@@ -124,7 +124,8 @@ body {
     display: flex;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
-    justify-content: center
+    justify-content: center; 
+    transition: 0.5s;
 }
 
 .left__content {
@@ -153,7 +154,7 @@ body {
 
 .icon__bg-R {
     right: -20%;
-    top: 450px;
+    bottom: -150px;
 }
 
 .dashboard {
@@ -161,8 +162,8 @@ body {
     width: 100%;
     -webkit-transition: 0.3s;
     -o-transition: 0.3s;
-    transition: 0.3s;
-    top: 550px
+    transition: 0.3s; 
+    bottom: -350px;
 }
 
 .dashboard-1 {
@@ -173,7 +174,7 @@ body {
 }
 
 .dashboard-2 {
-    left: 75%;
+    left: 65%;
     -webkit-transform: translateX(-50%);
     -ms-transform: translateX(-50%);
     transform: translateX(-50%)
@@ -188,7 +189,7 @@ body {
     width: 100%;
     -o-object-fit: contain;
     object-fit: contain;
-    margin-bottom: 60px
+    margin-bottom: 30px; 
 }
 
 .title {
@@ -234,7 +235,7 @@ body {
     width: 100%;
     height: calc((100% - 120px));
     overflow-y: auto;
-    padding-top: 135px;
+    padding-top: 50px;
     position: absolute;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -264,7 +265,7 @@ body {
 }
 
 #right-1 {
-    padding-top: 190px
+    padding-top: 130px
 }
 
 .inner {
@@ -392,7 +393,7 @@ body {
 .number {
     position: relative;
     min-width: 131px; 
-    width: fit-content;
+    width: fit-content; 
 }
 
 .window__day {
@@ -401,16 +402,18 @@ body {
     font-weight: 400;
     font-size: 14px;
     line-height: 21px;
-    color: var(--blue);
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-    left: 50px;  
-    background: var(--grey-2);
-    padding: 0 2px;
+    color: var(--purple); 
+    top: 0; 
+    height: 100%;
+    left: 55px;  
+    background: transparent;
+    padding: 0 15px;
     letter-spacing: 0.05em;
     border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-left: 2px solid var(--grey-2); 
 }
 
 .number__input {
@@ -418,18 +421,35 @@ body {
     padding: 14px;
     border: 2px solid var(--grey-2);
     border-radius: 3px;
-    font-family: var(--f400-lato);
-    font-weight: 400;
-    font-size: 14px;
+    font-family: var(--f700-lato);
+    font-weight: 700;
+    font-size: 16px;
     line-height: 21px;
-    color: var(--purple); 
+    color: var(--black);   
 }
 
 .number__input:focus {
     outline: none;
     border: 2px solid var(--purple)
 }
- 
+.number__input:focus ~ .window__day {
+    border-left: 2px solid var(--purple); 
+}
+.number::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 14px; 
+    width: 30px;
+    height: 21px;
+    z-index: 0;
+    background: var(--purple-opacity-20);
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    pointer-events: none;
+
+}
 .number__btn {
     position: absolute;
     width: 46px;
@@ -736,10 +756,12 @@ body {
     color: var(--white)
 }
 .add__item.choose {
-    background: var(--light-blue);
+    background: var(--light-purple);
     color: var(--white)
 }
-
+.add__item.choose:hover {
+    background: var(--blue); 
+}
 .circle {
     width: 20px;
     height: 20px;
